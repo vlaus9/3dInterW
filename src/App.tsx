@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from './store/hooks'
-import { cashTextContent, changeText, clearInput } from './store/slices/inputSlice'
+import { cashTextContent, changeText, clearInput, delElem } from './store/slices/inputSlice'
 import './App.css'
 
 
@@ -14,7 +14,9 @@ function App() {
       </input>
       <button onClick={() => dispatch(changeText())}>Внести изменения</button>
       <button onClick={() => dispatch(clearInput())}>Очистка</button>
-      <h1>{textShow === '' ? initialText : textShow}</h1>
+      {textShow ? textShow.map((item) => {
+        return <h1 key={item.id}>{item.content} <button onClick={() => dispatch(delElem(item.id))}>Х</button></h1>
+      }) : null }
     </>
   )
 }
