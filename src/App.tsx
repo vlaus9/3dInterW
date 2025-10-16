@@ -1,12 +1,13 @@
 import { useAppDispatch, useAppSelector } from './store/hooks'
 import { cashTextContent, changeText, clearInput, delElem } from './store/slices/inputSlice'
-import { ExelImporter } from './components/exelImport'
+import { ExelImporter } from './components/ExelImport'
 import './App.css'
+import { ExelTable } from './components/ExelTable.tsx'
 
 
 function App() {
 
-  const { isClear, cashText, textShow } = useAppSelector((state) => state.textSlice)
+  const { isClear, cashText, textShow } = useAppSelector((state) => state.text)
   const dispatch = useAppDispatch()
 
   return (
@@ -20,6 +21,7 @@ function App() {
       }) : null }
 
       <ExelImporter />
+      <ExelTable />
     </>
   )
 }

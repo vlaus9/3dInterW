@@ -4,8 +4,8 @@ import exelSlice from './slices/exelSlice'
 
 export const store = configureStore({
     reducer: {
-        textSlice,
-        exelSlice
+        text: textSlice,
+        exel: exelSlice
     }
 })
 

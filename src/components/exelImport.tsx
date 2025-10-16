@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useAppDispatch } from '../store/hooks';
-import { setExelData, setError, type IExelRow } from '../store/slices/exelSlice';
+import { isLoading, setExelData, setError, type IExelRow } from '../store/slices/exelSlice';
 import * as XLSX from 'xlsx';
 
 
@@ -13,6 +13,7 @@ export const ExelImporter: React.FC = () => {
         const file = event.target.files?.[0];
         if (!file) {return}
     
+    dispatch(isLoading())
 
     const reader = new FileReader();
 

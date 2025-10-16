@@ -31,6 +31,10 @@ const exelSlice = createSlice( {
     initialState,
     reducers: {
 
+        isLoading: (state) => {
+            state.isLoad = true
+            state.error = null
+        },
         setExelData: (state, actions: PayloadAction<IExelData>) => {
             state.data = actions.payload.data,
             state.headers = actions.payload.headers,
@@ -50,6 +54,6 @@ const exelSlice = createSlice( {
     })
 
 export default exelSlice.reducer
-export const { setExelData, setError, clearData} = exelSlice.actions
+export const { isLoading, setExelData, setError, clearData} = exelSlice.actions
 
 
