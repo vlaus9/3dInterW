@@ -1,11 +1,12 @@
 import { useAppDispatch, useAppSelector } from './store/hooks'
 import { cashTextContent, changeText, clearInput, delElem } from './store/slices/inputSlice'
+import { ExelImporter } from './components/exelImport'
 import './App.css'
 
 
 function App() {
 
-  const { isClear, initialText, cashText, textShow } = useAppSelector((state) => state.textSlice)
+  const { isClear, cashText, textShow } = useAppSelector((state) => state.textSlice)
   const dispatch = useAppDispatch()
 
   return (
@@ -17,6 +18,8 @@ function App() {
       {textShow ? textShow.map((item) => {
         return <h1 key={item.id}>{item.content} <button onClick={() => dispatch(delElem(item.id))}>Х</button></h1>
       }) : null }
+
+      <ExelImporter />
     </>
   )
 }
