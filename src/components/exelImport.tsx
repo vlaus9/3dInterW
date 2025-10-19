@@ -12,7 +12,6 @@ export const ExelImporter: React.FC = () => {
     const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (!file) {return}
-    
     dispatch(isLoading())
 
     const reader = new FileReader();
