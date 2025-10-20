@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from './store/hooks'
 import { cashTextContent, changeText, clearInput, delElem } from './store/slices/inputSlice'
-import { ExelImporter } from './components/ExelImport'
+import { ExelImporter } from './components/ExelImport.tsx'
 import './App.css'
 import { ExelTable } from './components/ExelTable.tsx'
 

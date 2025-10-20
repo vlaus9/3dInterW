@@ -1,5 +1,5 @@
 import { useAppSelector } from '../store/hooks'
-import { List } from 'antd'
+import { Spin } from 'antd'
 
 
 export const ExelTable: React.FC = () => {
@@ -9,8 +9,8 @@ export const ExelTable: React.FC = () => {
     if (isLoad) {
         return (
             <>
-                <div>
-                    <List />
+                <div className={'text-center'}>
+                    <Spin size='large' />
                     <h1>Файл загружается...</h1>
                 </div>
             </>
@@ -31,15 +31,16 @@ export const ExelTable: React.FC = () => {
         return (
             <>
                 <div>
-                    <h1>Данные не загружены</h1>
+                    <h1 className={'text-center'}>Данные не загружены</h1>
                 </div>
             </>
         )
     }
-
+console.log(data)
     return (
     <>
         <div>
+
             <div>
                 <h3>Файл: {fileName}</h3>
                 <h3>Найдено {data.length} строк, {headers.length} колонок </h3>
@@ -52,12 +53,30 @@ export const ExelTable: React.FC = () => {
                             {headers.map((header, index) => {
                                 return <th
                                 key={index}
-                                style={{border: '1px solid black'
-                                }}>
+                                className={'border text-[20px]'}
+                                >
                                 {header}</th>
                             })}
                         </tr>
                     </thead>
+                    
+                    <tbody>
+                        {data.map((row, index) => {
+                            return <tr
+                            key={index}
+                            // className={index % 2 === 0 ? 'bg-[#30ab8eff]' : 'bg-[#076851ff]'}
+                            >
+                                {headers.map((header, index) => {
+                                    return <td
+                                    key={index}
+                                    className={'bg-[#33c5a3ff] border text-center'}
+                                    >
+                                        {row[header]?.toString() || ''}
+                                    </td>
+                                })}
+                            </tr>
+                        })}
+                    </tbody>
 
 
                 </table>

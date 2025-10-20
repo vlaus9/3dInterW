@@ -1,4 +1,5 @@
-import { useRef } from 'react';
+
+import { useRef, useCallback } from 'react';
 import { useAppDispatch } from '../store/hooks';
 import { isLoading, setExelData, setError, type IExelRow } from '../store/slices/exelSlice';
 import * as XLSX from 'xlsx';
@@ -10,8 +11,21 @@ export const ExelImporter: React.FC = () => {
     const fileInputRef = useRef<HTMLInputElement>(null)
 
     const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (!file) {return}
+    
+    const file = event.target.files?.[0];
+    
+    if (!file) {return}
+
+    const fileName = file.name.toLowerCase()
+    const filterFileName = fileName.endsWith('.xlsx') || fileName.endsWith('.xls') || fileName.endsWith('.csv');
+
+    if (!filterFileName) {
+        dispatch(setError('Выберите файл формата .xlsx, .xls или .csv'))
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+        }
+        return
+    }
     dispatch(isLoading())
 
     const reader = new FileReader();
@@ -67,13 +81,12 @@ export const ExelImporter: React.FC = () => {
                 <input 
                 type='file' 
                 ref={fileInputRef} 
-                accept='.xlsx, .xls' 
                 onChange={handleFileUpload} 
                 className='m-y-[10px]'>
                 </input>
             </div>
         </>
     )
-} 
+}
 
     
